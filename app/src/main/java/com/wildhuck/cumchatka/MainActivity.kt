@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
 
                 page.apply {
 
-                    ViewCompat.setElevation(page, 20-abs(position))
+                    ViewCompat.setElevation(page, 20 - abs(position))
 
                     when {
                         position == 0f -> {
