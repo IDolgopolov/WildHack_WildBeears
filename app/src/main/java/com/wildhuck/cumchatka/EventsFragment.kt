@@ -35,7 +35,7 @@ class EventsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        eventsAdapter = EventsAdapter()
+        eventsAdapter = EventsAdapter{ onEventClick(it) }
         val events = mutableListOf<String>()
         events.add("event1")
         events.add("event2")
@@ -94,6 +94,11 @@ class EventsFragment : Fragment() {
             TabLayoutMediator(tabs, viewPager) { tab, position ->
             }.attach()
         }
+    }
+
+    private fun onEventClick(it: String) {
+        findNavController().navigate(EventsFragmentDirections.actionEventsFragmentToEventFragment())
+
     }
 
     companion object {

@@ -10,6 +10,10 @@
         android:label="TimelineFragment"
         tools:layout="@layout/fragment_timeline">
         <action
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out"
             android:id="@+id/action_timelineFragment_to_eventsFragment"
             app:destination="@id/eventsFragment"/>
     </fragment>
@@ -18,5 +22,18 @@
         android:name="com.wildhuck.cumchatka.EventsFragment"
         android:label="EventsFragment"
         tools:layout="@layout/fragment_events">
+        <action
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out"
+            android:id="@+id/action_eventsFragment_to_EventFragment"
+            app:destination="@id/eventFragment"/>
+    </fragment>
+    <fragment
+        android:id="@+id/eventFragment"
+        android:name="com.wildhuck.cumchatka.EventFragment"
+        android:label="EventFragment"
+        tools:layout="@layout/fragment_event">
     </fragment>
 </navigation>

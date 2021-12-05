@@ -9,7 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.wildhuck.cumchatka.databinding.EventListItemBinding
 import com.wildhuck.cumchatka.databinding.TimelieItemBinding
 
-class EventsAdapter : RecyclerView.Adapter<EventsAdapter.EventsHolder>() {
+class EventsAdapter(
+    private val block: (data: String) -> Unit
+) : RecyclerView.Adapter<EventsAdapter.EventsHolder>() {
     private var items = mutableListOf<String>()
 
     private lateinit var context: Context
@@ -27,7 +29,7 @@ class EventsAdapter : RecyclerView.Adapter<EventsAdapter.EventsHolder>() {
             false
         )
         context = parent.context
-        return EventsHolder(view)
+        return EventsHolder(view, block)
     }
 
     override fun onBindViewHolder(holder: EventsHolder, position: Int) {
@@ -36,11 +38,15 @@ class EventsAdapter : RecyclerView.Adapter<EventsAdapter.EventsHolder>() {
 
     override fun getItemCount() = items.size
 
-    inner class EventsHolder(view: View) : RecyclerView.ViewHolder(view) {
+    inner class EventsHolder(
+        view: View,
+        private val block: (data: String) -> Unit
+    ) : RecyclerView.ViewHolder(view) {
         private val binding: EventListItemBinding = EventListItemBinding.bind(view)
 
         fun bind(data: String) {
             binding.apply {
+                root.setOnClickListener { block(data) }
             }
         }
     }
