@@ -1,6 +1,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/white"
     android:layout_height="match_parent">
 
@@ -43,7 +44,7 @@
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:adjustViewBounds="true"
-                    android:background="@drawable/kamchatka"
+                    tools:background="@drawable/kamchatka"
                     android:scaleType="centerCrop"
                     app:layout_constraintDimensionRatio="1.7:1"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -79,6 +80,35 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/promotionMedium_tv_title" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:textColor="@color/black"
+                    android:text="@string/link"
+                    app:layout_constraintTop_toBottomOf="@id/promotionMedium_tv_business"
+                    android:id="@+id/text"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/event_url"
+                    android:layout_width="match_parent"
+                    android:autoLink="web"
+                    android:linksClickable="true"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:ellipsize="end"
+                    android:text="@string/url_example"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/roboto_medium_500"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/text" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -43,6 +43,7 @@ class TimelineAdapter(
     ) : RecyclerView.ViewHolder(view) {
         private val binding: TimelieItemBinding = TimelieItemBinding.bind(view)
 
+        @SuppressLint("SetTextI18n")
         fun bind(data: Day) {
             binding.apply {
                 root.setOnClickListener { block(data) }

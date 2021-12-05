@@ -6,5 +6,5 @@ data class Event(
     val title: String,
     val text: String,
     val date: String,
-    val img: Drawable? = null
+    val img: String
 )
