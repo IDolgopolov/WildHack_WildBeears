@@ -12,40 +12,48 @@ import com.wildhuck.cumchatka.databinding.TimelieItemBinding
 class EventsAdapter : RecyclerView.Adapter<EventsAdapter.EventsHolder>() {
     private var items = mutableListOf<News>()
 
-    private lateinit var context: Context
+    class EventsAdapter(
+        private val block: (data: News) -> Unit
+    ) : RecyclerView.Adapter<EventsAdapter.EventsHolder>() {
+        private var items = mutableListOf<News>()
 
-    @SuppressLint("NotifyDataSetChanged")
-    fun insert(data: List<News>) {
-        items.addAll(data)
-        notifyDataSetChanged()
-    }
+        private lateinit var context: Context
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventsHolder {
-        val view = LayoutInflater.from(parent.context).inflate(
-            R.layout.event_list_item,
-            parent,
-            false
-        )
-        context = parent.context
-        return EventsHolder(view)
-    }
+        @SuppressLint("NotifyDataSetChanged")
+        fun insert(data: List<News>) {
+            items.addAll(data)
+            notifyDataSetChanged()
+        }
 
-    override fun onBindViewHolder(holder: EventsHolder, position: Int) {
-        holder.bind(items[position])
-    }
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventsHolder {
+            val view = LayoutInflater.from(parent.context).inflate(
+                R.layout.event_list_item,
+                parent,
+                false
+            )
+            context = parent.context
+            return EventsHolder(view, block)
+        }
 
-    override fun getItemCount() = items.size
+        override fun onBindViewHolder(holder: EventsHolder, position: Int) {
+            holder.bind(items[position])
+        }
 
-    inner class EventsHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val binding: EventListItemBinding = EventListItemBinding.bind(view)
+        override fun getItemCount() = items.size
 
-        fun bind(data: News) {
-            binding.apply {
-                binding.promotionMediumTvTitle.text = data.title
-                binding.promotionMediumTvBusiness.text = data.text
-                binding.promotionMediumIvImage.setImageDrawable(data.img)
-                binding.promotionMediumTvDuration.text = data.date
+        inner class EventsHolder(
+            view: View,
+            private val block: (data: String) -> Unit
+        ) : RecyclerView.ViewHolder(view) {
+            private val binding: EventListItemBinding = EventListItemBinding.bind(view)
+
+            fun bind(data: News) {
+                binding.apply {
+                    binding.promotionMediumTvTitle.text = data.title
+                    binding.promotionMediumTvBusiness.text = data.text
+                    binding.promotionMediumIvImage.setImageDrawable(data.img)
+                    binding.promotionMediumTvDuration.text = data.date
+                }
             }
         }
     }
-}
