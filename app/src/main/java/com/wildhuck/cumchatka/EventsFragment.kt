@@ -2,21 +2,14 @@ package com.wildhuck.cumchatka
 
 import android.content.Context
 import android.os.Bundle
-import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager2.widget.ViewPager2
-import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.wildhuck.cumchatka.databinding.FragmentEventsBinding
-import com.wildhuck.cumchatka.databinding.FragmentTimelineBinding
 import kotlin.math.abs
 
 class EventsFragment : Fragment() {
@@ -50,7 +43,7 @@ class EventsFragment : Fragment() {
     override fun onPause() {
         super.onPause()
         val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
-        with (sharedPref!!.edit()) {
+        with(sharedPref!!.edit()) {
             putInt("viewPagerSavedState", binding.viewPager.currentItem)
             apply()
         }
@@ -58,9 +51,11 @@ class EventsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        eventsAdapter = EventsAdapter()
+        eventsAdapter = EventsAdapter() {
+            onEventClick(it)
+        }
 
-        eventsAdapter?.insert(day!!.news)
+        eventsAdapter?.insert(day!!.events)
 
         binding.apply {
             back.setOnClickListener {
@@ -112,7 +107,8 @@ class EventsFragment : Fragment() {
         }
     }
 
-    private fun onEventClick(it: String) {
+    private fun onEventClick(it: Event) {
+        EventFragment.event = it
         findNavController().navigate(EventsFragmentDirections.actionEventsFragmentToEventFragment())
 
     }

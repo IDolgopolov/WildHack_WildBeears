@@ -47,7 +47,7 @@ class TimelineAdapter(
             binding.apply {
                 root.setOnClickListener { block(data) }
                 timelineYear.text = data.date
-                count.text = "Событий: ${data.news.size}"
+                count.text = "Событий: ${data.events.size}"
             }
         }
     }

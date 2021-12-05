@@ -10,7 +10,10 @@ import com.wildhuck.cumchatka.databinding.FragmentEventBinding
 
 class EventFragment : Fragment() {
     private lateinit var binding: FragmentEventBinding
-    private var eventsAdapter: EventsAdapter? = null
+
+    companion object {
+        var event: Event? = null
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,6 +31,11 @@ class EventFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
+            promotionMediumTvTitle.text = event?.title
+            promotionMediumTvBusiness.text = event?.text
+            promotionMediumIvImage.setImageDrawable(event?.img)
+
+
             back.setOnClickListener {
                 findNavController().navigateUp()
             }
