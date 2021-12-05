@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.wildhuck.cumchatka.databinding.FragmentTimelineBinding
 
 class TimelineFragment : Fragment() {
@@ -28,22 +29,19 @@ class TimelineFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val timeList = mutableListOf<String>()
-        timeList.add("1927")
-        timeList.add("1935")
-        timeList.add("1950")
-        timeList.add("1967")
-        timeList.add("1999")
-        timeList.add("2001")
-        timeList.add("2005")
+        val timeList = mutableListOf<Day>()
+        timeList.addAll(Source.getDays())
+
         binding.apply {
             timelineAdapter = TimelineAdapter { onTimeClick(it) }
             timelineList.adapter = timelineAdapter
             timelineAdapter.insert(timeList)
         }
+
     }
 
-    private fun onTimeClick(it: String) {
+    private fun onTimeClick(it: Day) {
+        EventsFragment.day = it
         findNavController().navigate(TimelineFragmentDirections.actionTimelineFragmentToEventsFragment())
     }
 }

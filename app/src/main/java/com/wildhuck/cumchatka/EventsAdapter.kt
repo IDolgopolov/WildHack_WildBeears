@@ -10,12 +10,12 @@ import com.wildhuck.cumchatka.databinding.EventListItemBinding
 import com.wildhuck.cumchatka.databinding.TimelieItemBinding
 
 class EventsAdapter : RecyclerView.Adapter<EventsAdapter.EventsHolder>() {
-    private var items = mutableListOf<String>()
+    private var items = mutableListOf<News>()
 
     private lateinit var context: Context
 
     @SuppressLint("NotifyDataSetChanged")
-    fun insert(data: List<String>) {
+    fun insert(data: List<News>) {
         items.addAll(data)
         notifyDataSetChanged()
     }
@@ -39,8 +39,12 @@ class EventsAdapter : RecyclerView.Adapter<EventsAdapter.EventsHolder>() {
     inner class EventsHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding: EventListItemBinding = EventListItemBinding.bind(view)
 
-        fun bind(data: String) {
+        fun bind(data: News) {
             binding.apply {
+                binding.promotionMediumTvTitle.text = data.title
+                binding.promotionMediumTvBusiness.text = data.text
+                binding.promotionMediumIvImage.setImageDrawable(data.img)
+                binding.promotionMediumTvDuration.text = data.date
             }
         }
     }

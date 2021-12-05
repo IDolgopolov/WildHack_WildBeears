@@ -36,15 +36,8 @@ class EventsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         eventsAdapter = EventsAdapter()
-        val events = mutableListOf<String>()
-        events.add("event1")
-        events.add("event2")
-        events.add("event3")
-        events.add("event4")
-        events.add("event5")
-        events.add("event6")
-        events.add("event7")
-        eventsAdapter?.insert(events)
+
+        eventsAdapter?.insert(day!!.news)
 
         binding.apply {
             back.setOnClickListener {
@@ -107,5 +100,6 @@ class EventsFragment : Fragment() {
         private const val ALPHA_FACTOR = .3f
         private const val DEFAULT_ALPHA = 1f
 
+        var day: Day? = null
     }
 }

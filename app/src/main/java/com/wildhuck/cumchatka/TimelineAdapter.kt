@@ -9,14 +9,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.wildhuck.cumchatka.databinding.TimelieItemBinding
 
 class TimelineAdapter(
-    private val block: (data: String) -> Unit
+    private val block: (data: Day) -> Unit
 ) : RecyclerView.Adapter<TimelineAdapter.TimelineHolder>() {
-    private var items = mutableListOf<String>()
+    private var items = mutableListOf<Day>()
 
     private lateinit var context: Context
 
     @SuppressLint("NotifyDataSetChanged")
-    fun insert(data: List<String>) {
+    fun insert(data: List<Day>) {
         items.addAll(data)
         notifyDataSetChanged()
     }
@@ -39,14 +39,15 @@ class TimelineAdapter(
 
     inner class TimelineHolder(
         view: View,
-        private val block: (data: String) -> Unit
+        private val block: (data: Day) -> Unit
     ) : RecyclerView.ViewHolder(view) {
         private val binding: TimelieItemBinding = TimelieItemBinding.bind(view)
 
-        fun bind(data: String) {
+        fun bind(data: Day) {
             binding.apply {
                 root.setOnClickListener { block(data) }
-                timelineYear.text = data
+                timelineYear.text = data.date
+                count.text = "Событий: ${data.news.size}"
             }
         }
     }

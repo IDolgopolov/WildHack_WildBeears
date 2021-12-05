@@ -10,8 +10,8 @@
         android:id="@+id/back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="30dp"
         android:text="назад"
         android:textAllCaps="true"
         android:textColor="#9FA6A6A6"
@@ -39,7 +39,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:tabIndicatorHeight="1dp" />
+        app:tabBackground="@drawable/tab_selector"
+        app:tabIndicatorColor="#FF9800"
+        app:tabIndicatorHeight="2dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

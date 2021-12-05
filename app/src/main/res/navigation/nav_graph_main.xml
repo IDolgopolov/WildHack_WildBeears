@@ -16,7 +16,6 @@
     <fragment
         android:id="@+id/eventsFragment"
         android:name="com.wildhuck.cumchatka.EventsFragment"
-        android:label="EventsFragment"
-        tools:layout="@layout/fragment_events">
+        android:label="EventsFragment">
     </fragment>
 </navigation>
