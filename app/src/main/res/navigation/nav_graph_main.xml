@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/timelineFragment"
+    android:id="@+id/nav_graph_main">
+    <fragment
+        android:id="@+id/timelineFragment"
+        android:name="com.wildhuck.cumchatka.TimelineFragment"
+        android:label="TimelineFragment"
+        tools:layout="@layout/fragment_timeline">
+        <action
+            android:id="@+id/action_timelineFragment_to_eventsFragment"
+            app:destination="@id/eventsFragment"/>
+    </fragment>
+    <fragment
+        android:id="@+id/eventsFragment"
+        android:name="com.wildhuck.cumchatka.EventsFragment"
+        android:label="EventsFragment"
+        tools:layout="@layout/fragment_events">
+    </fragment>
+</navigation>
