@@ -1,6 +1,8 @@
 package com.wildhuck.cumchatka
 
+import android.content.Context
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +10,7 @@ import android.widget.TextView
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
@@ -20,6 +23,10 @@ class EventsFragment : Fragment() {
     private lateinit var binding: FragmentEventsBinding
     private var eventsAdapter: EventsAdapter? = null
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -31,6 +38,22 @@ class EventsFragment : Fragment() {
             false
         )
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
+        val viewPagerSavedState = sharedPref.getInt("viewPagerSavedState", 0)
+        binding.viewPager.currentItem = viewPagerSavedState
+    }
+
+    override fun onPause() {
+        super.onPause()
+        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
+        with (sharedPref!!.edit()) {
+            putInt("viewPagerSavedState", binding.viewPager.currentItem)
+            apply()
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
